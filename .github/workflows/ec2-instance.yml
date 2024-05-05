@@ -1,40 +1,36 @@
-# name: Terraform CI
+name: Deploy EC2 Instance
 
-# on:
-#   push:
-#     branches: [ "feature/*", "develop", "main" ]
+on:
+  push:
+    branches:
+      - main
       
 
-# jobs:
-#   Terraform:
-#     name: 'Terraform'
-#     runs-on: ubuntu-latest
-#     defaults:
-#       run:
-#         shell: bash
-#         working-directory: ./project-zenith-example
+jobs:
+  Terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
 
-#     steps:
-#     - name: Checkout
-#       uses: actions/checkout@v4      
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4      
       
-#     - name: Setup Terraform
-#       uses: hashicorp/setup-terraform@v1
-#       with:
-#         cli_config_credentials_token: ${{ secrets.tfc_team_token }}
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        cli_config_credentials_token: ${{ secrets.tfc_team_token }}
       
-#     - name: Terraform Init
-#       run: terraform init
+    - name: Terraform Init
+      run: terraform init
       
-#     - name: Terraform Validate
-#       run: terraform validate 
+    - name: Terraform Validate
+      run: terraform validate 
        
-#     - name: Terraform Plan
-#       run: terraform plan
+    - name: Terraform Plan
+      run: terraform plan
          
-#     - name: Terraform Apply
-#      # if: ${{ github.event_name == 'pull_request' && github.event.pull_request.merged == true && github.ref == 'refs/heads/main' }}
-#       run: terraform apply -auto-approve
+    - name: Terraform Apply
+      run: terraform apply -auto-approve
 
-#     - name: Terraform destroy
-#       run: terraform destroy -auto-a
+    - name: Terraform destroy
+      run: terraform destroy -auto-a
