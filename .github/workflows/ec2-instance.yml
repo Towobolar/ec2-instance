@@ -4,7 +4,17 @@ on:
   push:
     branches:
       - main
-      
+  workflow_dispatch:
+    inputs:
+      build_id:
+        required: true
+        type: string
+      deploy_target:
+        required: true
+        type: string
+      perform_deploy:
+        required: true
+        type: boolean    
 
 jobs:
   Terraform:
@@ -31,6 +41,12 @@ jobs:
          
     - name: Terraform Apply
       run: terraform apply -auto-approve
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.perform_deploy }}
+    steps:
+      # - name: Deploy build to target
+      #   run: echo "Deploying build:${{ inputs.build_id }} to target:${{ inputs.deploy_target }}"     
 
-    - name: Terraform destroy
-      run: terraform destroy -auto-approve
+      - name: Terraform destroy
+        run: terraform destroy -auto-approve
