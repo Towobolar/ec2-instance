@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   Terraform:
@@ -31,9 +30,9 @@ jobs:
          
     - name: Terraform Apply
       run: terraform apply -auto-approve
-  Destroy:
-    runs-on: ubuntu-latest
-    # if: ${{ github.event_name == 'workflow_dispatch' &&  github.ref == 'refs/heads/main' }}
-    steps:
-      - name: Terraform destroy
-        run: terraform destroy -auto-approve
+  # Destroy:
+  #   runs-on: ubuntu-latest
+  #   # if: ${{ github.event_name == 'workflow_dispatch' &&  github.ref == 'refs/heads/main' }}
+    #steps:
+    - name: Terraform destroy
+      run: terraform destroy -auto-approve
