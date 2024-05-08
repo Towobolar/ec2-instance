@@ -9,7 +9,7 @@ on:
       destroy-infra:
         description: 'Destroy the infrastructure'
         required: true
-        default: 'false'
+        default: 'true'
 
 jobs:
   Terraform:
