@@ -5,11 +5,11 @@ on:
     branches:
       - main
   workflow_dispatch:
-    inputs:
-      destroy-infra:
-        description: 'Destroy the infrastructure'
-        required: false
-        default: 'false'
+    # inputs:
+    #   destroy-infra:
+    #     description: 'Destroy the infrastructure'
+    #     required: false
+    #     default: 'false'
 
 jobs:
   Terraform:
@@ -38,5 +38,5 @@ jobs:
       run: terraform apply -auto-approve
 
     - name: Terraform Destroy
-      if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' || github.event.inputs.destroy-infra == 'true' }}
+      if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' }}
       run: terraform destroy -auto-approve
