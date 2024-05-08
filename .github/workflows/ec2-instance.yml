@@ -38,5 +38,5 @@ jobs:
       run: terraform apply -auto-approve
 
     - name: Terraform Destroy
-      if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && github.event.inputs.destroy-infra == 'true' }}
+      if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' || github.event.inputs.destroy-infra == 'true' }}
       run: terraform destroy -auto-approve
