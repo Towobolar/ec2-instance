@@ -8,7 +8,7 @@ on:
     inputs:
       destroy-infra:
         description: 'Destroy the infrastructure'
-        required: false
+        required: true
         default: 'false'
 
 jobs:
