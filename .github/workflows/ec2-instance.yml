@@ -35,5 +35,8 @@ jobs:
     runs-on: ubuntu-latest
     # if: ${{ github.event_name == 'workflow_dispatch' &&  github.ref == 'refs/heads/main' }}
     steps:
+      - name: Terraform init
+      - run: terraform init
+      
       - name: Terraform destroy
         run: terraform destroy -auto-approve
