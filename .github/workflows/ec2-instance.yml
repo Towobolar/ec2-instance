@@ -13,8 +13,8 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./project-zenith-example
-        
+        working-directory: ./ec2-instance
+
     steps:
     - name: Checkout
       uses: actions/checkout@v4      
