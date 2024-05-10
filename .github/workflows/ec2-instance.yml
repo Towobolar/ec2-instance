@@ -3,7 +3,7 @@ name: Deploy EC2 Instance
 on:
   push:
     branches:
-      - main
+      - feature/security-check
   workflow_dispatch:
 
 jobs:
@@ -29,10 +29,10 @@ jobs:
     - name: Terraform Plan
       run: terraform plan
 
-build:
-  name: checkov
-  runs-on: ubuntu-latest
-  steps:
+  build:
+   name: checkov
+   runs-on: ubuntu-latest
+   steps:
    - uses: actions/checkout@v2
    - name: Set up Python 3.8
      uses: actions/setup-python@v1
@@ -45,8 +45,8 @@ build:
         directory: ./project-zenith-example
         framework: terraform     
          
-   # - name: Terraform Apply
-   #   run: terraform apply -auto-approve
+   - name: Terraform Apply
+     run: terraform apply -auto-approve
 
    # - name: Terraform Destroy
    #  #  if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' }}
