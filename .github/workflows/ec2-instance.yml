@@ -28,10 +28,26 @@ jobs:
        
     - name: Terraform Plan
       run: terraform plan
-         
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
 
-    - name: Terraform Destroy
-      if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' }}
-      run: terraform destroy -auto-approve
+build:
+  name: checkov
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/checkout@v2
+   - name: Set up Python 3.8
+     uses: actions/setup-python@v1
+     with:
+        python-version: 3.8
+   - name: Test with Checkov
+     id: checkov
+     uses: bridgecrewio/checkov-action@master
+     with:
+        directory: ./project-zenith-example
+        framework: terraform     
+         
+   # - name: Terraform Apply
+   #   run: terraform apply -auto-approve
+
+   # - name: Terraform Destroy
+   #  #  if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' }}
+   #   run: terraform destroy -auto-approve
