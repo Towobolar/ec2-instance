@@ -48,7 +48,7 @@ jobs:
      with:
         directory: ./ec2-instance
         framework: terraform     
-         
+          
     # - name: Terraform Apply
     #   run: terraform apply -auto-approve
 
